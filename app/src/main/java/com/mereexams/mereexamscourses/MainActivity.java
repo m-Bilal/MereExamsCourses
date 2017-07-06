@@ -7,9 +7,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.mereexams.mereexamscourses.Models.DisciplineGroup;
+import com.mereexams.mereexamscourses.Models.DisciplineGroupCategory;
 import com.mereexams.mereexamscourses.helpers.FileIO;
 
 import java.util.HashMap;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +26,11 @@ public class MainActivity extends AppCompatActivity {
     public final static String BASE_URL = "base_url";
     public final static String TOKEN = "token";
 
+    private final static String TAG = "MainActivity";
+
     Button buttonSync;
+    Realm realm;
+    public static RealmConfiguration config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +42,39 @@ public class MainActivity extends AppCompatActivity {
         FileIO fileIO = new FileIO(this);
         vars = fileIO.getVars();
 
+        createRealmConfig();
+        readRealm();
         setOnClickListeners();
+    }
+
+    void createRealmConfig() {
+        // initialize Realm
+        Realm.init(getApplicationContext());
+
+        // create your Realm configuration
+        config = new RealmConfiguration
+                .Builder()
+                .deleteRealmIfMigrationNeeded()
+                .name("myCustomRealm")
+                .build();
+        Realm.setDefaultConfiguration(config);
+    }
+
+    void readRealm() {
+        try {
+            // Create a realm
+            realm = Realm.getInstance(config);
+            Log.i(TAG, realm.getConfiguration().getRealmFileName());
+
+            List<DisciplineGroup> disciplineGroups = realm.where(DisciplineGroup.class).findAll();
+            Log.i(TAG, "Discipline Groups saved size: " + disciplineGroups.size());
+
+            List<DisciplineGroupCategory> disciplineGroupCategories = realm.where(DisciplineGroupCategory.class).findAll();
+            Log.i(TAG, "Discipline Groups Categories saved size: " + disciplineGroupCategories.size());
+            realm.close();
+        } catch (Exception e) {
+            Log.e(TAG, "Realm Error: " + e.toString());
+        }
     }
 
     private void setOnClickListeners() {

@@ -38,62 +38,10 @@ public class CoursesActivity extends AppCompatActivity {
     }
 
     public void syncDisciplineGroups() {
-        // Creating the progress dialog
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading discipline groups");
-        progressDialog.show();
-
-        // Making the request
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<DisciplineGroup.DisciplineGroupResponse> call = apiService.getDisciplineGroups(
-                MainActivity.vars.get(MainActivity.API_BROAD_DISCIPLINE_GROUP),
-                MainActivity.vars.get(MainActivity.TOKEN));
-
-        call.enqueue(new Callback<DisciplineGroup.DisciplineGroupResponse>() {
-            @Override
-            public void onResponse(Call<DisciplineGroup.DisciplineGroupResponse> call, Response<DisciplineGroup.DisciplineGroupResponse> response) {
-                disciplineGroups = response.body().getDisciplineGroups();
-                progressDialog.dismiss();
-                // TODO: remove this after testing
-                Log.i(TAG, "Discipline groups size: " + disciplineGroups.size());
-            }
-
-            @Override
-            public void onFailure(Call<DisciplineGroup.DisciplineGroupResponse> call, Throwable t) {
-                progressDialog.dismiss();
-                Log.e(TAG, t.toString());
-                Toast.makeText(getApplicationContext(), "No internet", Toast.LENGTH_SHORT).show();
-            }
-        });
+        DisciplineGroup.sync(this);
     }
 
     public void syncDisciplineGroupCategories() {
-        // Creating the progress dialog
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading discipline groups");
-        progressDialog.show();
-
-        // Making the request
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<DisciplineGroupCategory.DisciplineGroupCategoryResponse> call = apiService.getDisciplineGroupCategories(
-                MainActivity.vars.get(MainActivity.API_BROAD_DISCIPLINE_GROUP_CATEGORY),
-                MainActivity.vars.get(MainActivity.TOKEN));
-
-        call.enqueue(new Callback<DisciplineGroupCategory.DisciplineGroupCategoryResponse>() {
-            @Override
-            public void onResponse(Call<DisciplineGroupCategory.DisciplineGroupCategoryResponse> call, Response<DisciplineGroupCategory.DisciplineGroupCategoryResponse> response) {
-                disciplineGroupCategories = response.body().getDisciplineGroupCategories();
-                progressDialog.dismiss();
-                // TODO: remove this after testing
-                Log.i(TAG, "Discipline categories size: " + disciplineGroupCategories.size());
-            }
-
-            @Override
-            public void onFailure(Call<DisciplineGroupCategory.DisciplineGroupCategoryResponse> call, Throwable t) {
-                progressDialog.dismiss();
-                Log.e(TAG, t.toString());
-                Toast.makeText(getApplicationContext(), "No internet", Toast.LENGTH_SHORT).show();
-            }
-        });
+        DisciplineGroupCategory.sync(this);
     }
 }
