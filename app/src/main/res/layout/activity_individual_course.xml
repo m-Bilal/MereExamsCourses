@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mereexams.mereexamscourses.IndividualCourseActivity"
+    android:padding="12sp">
+
+    <TextView
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Category Name"/>
+
+    <TextView
+        android:id="@+id/textview_category_name"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="category"/>
+
+    <TextView
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Category Id"/>
+
+    <TextView
+        android:id="@+id/textview_category_id"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="category"
+        android:layout_marginBottom="20dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_individual_course_activity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

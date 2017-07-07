@@ -1,5 +1,6 @@
 package com.mereexams.mereexamscourses;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -29,6 +30,11 @@ public class CoursesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TextView textViewCourses, textViewCategories, textViewRepeated;
     private MyRecyclerViewAdapter adapter;
+
+    public static final String CATEGORY_NAME = "category_name";
+    public static final String CATEGORY_ID = "category_id";
+
+    private static List<DisciplineGroup> clickedDisciplineGroup;
 
     private int repeated;
 
@@ -116,6 +122,10 @@ public class CoursesActivity extends AppCompatActivity {
         DisciplineGroupCategory.sync(this);
     }
 
+    public static List<DisciplineGroup> getClickedDisciplineGroup() {
+        return clickedDisciplineGroup;
+    }
+
 
     // Recycler View Adapter
     public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder> {
@@ -135,17 +145,21 @@ public class CoursesActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
+            final int pos = position;
             holder.textViewCategoryTitle.setText(categories.get(position).getDisciplineGroupCategory());
             holder.textViewCategoryId.setText(categories.get(position).getId() + "");
+            List<DisciplineGroup> groups = getDisciplineGroups(categories.get(position));
+            holder.textViewCourses.setText(groups.size() + "");
             holder.container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    clickedDisciplineGroup = getDisciplineGroups(categories.get(pos));
+                    Intent intent = new Intent(getApplicationContext(), IndividualCourseActivity.class);
+                    intent.putExtra(CoursesActivity.CATEGORY_NAME, categories.get(pos).getDisciplineGroupCategory());
+                    intent.putExtra(CoursesActivity.CATEGORY_ID, categories.get(pos).getId() + "");
+                    startActivity(intent);
                 }
             });
-
-            List<DisciplineGroup> groups = getDisciplineGroups(categories.get(position));
-            holder.textViewCourses.setText(groups.size() + "");
         }
 
         @Override

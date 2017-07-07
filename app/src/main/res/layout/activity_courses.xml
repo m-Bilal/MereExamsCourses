@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Total categories"/>
+        android:text="Total groups"/>
 
     <TextView
         android:id="@+id/textview_categories"
