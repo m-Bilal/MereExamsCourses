@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mereexams.mereexamscourses.Models.DisciplineGroup;
@@ -147,7 +148,6 @@ public class CoursesActivity extends AppCompatActivity {
         public void onBindViewHolder(MyViewHolder holder, int position) {
             final int pos = position;
             holder.textViewCategoryTitle.setText(categories.get(position).getDisciplineGroupCategory());
-            holder.textViewCategoryId.setText(categories.get(position).getId() + "");
             List<DisciplineGroup> groups = getDisciplineGroups(categories.get(position));
             holder.textViewCourses.setText(groups.size() + "");
             holder.container.setOnClickListener(new View.OnClickListener() {
@@ -169,16 +169,15 @@ public class CoursesActivity extends AppCompatActivity {
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
-            public TextView textViewCategoryId, textViewCategoryTitle, textViewCourses;
-            public LinearLayout container;
+            public TextView textViewCategoryTitle, textViewCourses;
+            public RelativeLayout container;
 
             public MyViewHolder(View view) {
                 super(view);
 
-                textViewCategoryId = (TextView) view.findViewById(R.id.recyclerview_category_id);
                 textViewCategoryTitle = (TextView) view.findViewById(R.id.recyclerview_category_title);
                 textViewCourses = (TextView) view.findViewById(R.id.recyclerview_category_courses);
-                container = (LinearLayout) view.findViewById(R.id.linearlayout_courses_activity_reyclerview_item_container);
+                container = (RelativeLayout) view.findViewById(R.id.linearlayout_courses_activity_reyclerview_item_container);
             }
         }
     }

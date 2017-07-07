@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,63 +9,90 @@
 
     <Button
         android:id="@+id/button_sync"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sync with Server"/>
 
     <Button
         android:id="@+id/button_update"
+        android:layout_below="@+id/button_sync"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update values"/>
 
     <TextView
+        android:id="@+id/textview_group_label"
         android:textSize="15sp"
-        android:layout_width="match_parent"
+        android:layout_below="@+id/button_update"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:layout_marginLeft="10dp"
         android:text="Total groups"/>
 
     <TextView
         android:id="@+id/textview_categories"
-        android:layout_width="match_parent"
+        android:layout_below="@+id/button_update"
+        android:layout_toRightOf="@+id/textview_group_label"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
+        android:textColor="#000"
         android:text="abc"/>
 
     <TextView
+        android:id="@+id/textview_courses_label"
+        android:layout_below="@id/textview_group_label"
         android:textSize="15sp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:layout_marginLeft="10dp"
         android:text="Total courses"/>
 
     <TextView
         android:id="@+id/textview_courses"
+        android:layout_toRightOf="@+id/textview_courses_label"
+        android:layout_below="@+id/textview_group_label"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
+        android:textColor="#000"
         android:text="abc"/>
 
     <TextView
+        android:id="@+id/textview_repeated_label"
+        android:layout_below="@+id/textview_courses_label"
         android:textSize="15sp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Repeated Courses"/>
+        android:layout_marginLeft="10dp"
+        android:text="Repeated Courses"
+        android:layout_marginBottom="10dp"/>
 
 
     <TextView
         android:id="@+id/textview_repeated"
-        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/textview_repeated_label"
+        android:layout_below="@+id/textview_courses_label"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
+        android:textColor="#000"
         android:text="abc"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_courses_activity"
+        android:layout_below="@+id/textview_repeated_label"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp">
     </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+</RelativeLayout>

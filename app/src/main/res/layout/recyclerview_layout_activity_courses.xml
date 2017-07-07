@@ -1,56 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="12dp"
-    android:id="@+id/linearlayout_courses_activity_reyclerview_item_container">
+    android:layout_marginBottom="10dp"
+    android:background="#000"
+    android:padding="1dp">
 
-    <TextView
-        android:background="#000"
+    <RelativeLayout
+        android:id="@+id/linearlayout_courses_activity_reyclerview_item_container"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="5dp"/>
-
-    <TextView
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Category:"/>
+        android:background="#FFF"
+        android:paddingBottom="10dp">
 
-    <TextView
-        android:id="@+id/recyclerview_category_title"
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Category:"/>
+        <TextView
+            android:id="@+id/textview_recyclerview_category_label"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category:"/>
 
-    <TextView
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Category ID:"/>
+        <TextView
+            android:id="@+id/recyclerview_category_title"
+            android:layout_toRightOf="@+id/textview_recyclerview_category_label"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category:"/>
 
-    <TextView
-        android:id="@+id/recyclerview_category_id"
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Category:"/>
+        <TextView
+            android:id="@+id/textview_recyclerview_courses_label"
+            android:layout_marginLeft="12dp"
+            android:layout_below="@+id/textview_recyclerview_category_label"
+            android:layout_alignParentLeft="true"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Courses:"/>
 
+        <TextView
+            android:id="@+id/recyclerview_category_courses"
+            android:layout_below="@+id/textview_recyclerview_category_label"
+            android:layout_toRightOf="@+id/textview_recyclerview_courses_label"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category:"/>
 
-    <TextView
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Courses:"/>
-
-    <TextView
-        android:id="@+id/recyclerview_category_courses"
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Category:"/>
-</LinearLayout>
+    </RelativeLayout>
+</FrameLayout>
