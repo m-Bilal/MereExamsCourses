@@ -21,6 +21,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.mereexams.mereexamscourses.MainActivity.config;
+
 /**
  * Created by Bilal on 06-Jul-17.
  */
@@ -61,7 +63,7 @@ public class DisciplineGroup extends RealmObject {
                 Log.i(TAG, "Discipline groups size: " + disciplineGroups.size());
 
                 // Realm
-                Realm realm = Realm.getInstance(MainActivity.config);
+                Realm realm = Realm.getInstance(config);
 
                 // Delete existing records from realm
                 realm.beginTransaction();
@@ -90,6 +92,21 @@ public class DisciplineGroup extends RealmObject {
                 Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public static List<DisciplineGroup> readFromRealm() {
+        Realm realm = Realm.getInstance(MainActivity.config);
+        List<DisciplineGroup> disciplineGroups = realm.where(DisciplineGroup.class).findAll();
+        return disciplineGroups;
+    }
+
+    // This method retrieves the saved data or syncs from server if the data is not found
+    public static List<DisciplineGroup> retrieveOrSync(Context context) {
+        List<DisciplineGroup> disciplineGroups = readFromRealm();
+        if (disciplineGroups.size() == 0) {
+            sync(context);
+        }
+        return readFromRealm();
     }
 
     public int getId() {

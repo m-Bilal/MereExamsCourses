@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = "MainActivity";
 
-    Button buttonSync;
+    Button buttonCourses;
     Realm realm;
     public static RealmConfiguration config;
 
@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonSync = (Button) findViewById(R.id.button_sync);
-
         FileIO fileIO = new FileIO(this);
         vars = fileIO.getVars();
 
+        buttonCourses = (Button) findViewById(R.id.button_courses);
+        Log.d(TAG, "Button Courses: " + buttonCourses.toString());
         createRealmConfig();
         readRealm();
         setOnClickListeners();
@@ -71,14 +71,13 @@ public class MainActivity extends AppCompatActivity {
 
             List<DisciplineGroupCategory> disciplineGroupCategories = realm.where(DisciplineGroupCategory.class).findAll();
             Log.i(TAG, "Discipline Groups Categories saved size: " + disciplineGroupCategories.size());
-            realm.close();
         } catch (Exception e) {
             Log.e(TAG, "Realm Error: " + e.toString());
         }
     }
 
     private void setOnClickListeners() {
-        buttonSync.setOnClickListener(new View.OnClickListener() {
+        buttonCourses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CoursesActivity.class);

@@ -88,6 +88,21 @@ public class DisciplineGroupCategory extends RealmObject {
         });
     }
 
+    public static List<DisciplineGroupCategory> readFromRealm() {
+        Realm realm = Realm.getInstance(MainActivity.config);
+        List<DisciplineGroupCategory> disciplineGroupCategories = realm.where(DisciplineGroupCategory.class).findAll();
+        return disciplineGroupCategories;
+    }
+
+    // This method retrieves the saved data or syncs from server if the data is not found
+    public static List<DisciplineGroupCategory> retrieveOrSync(Context context) {
+        List<DisciplineGroupCategory> disciplineGroups = readFromRealm();
+        if (disciplineGroups.size() == 0) {
+            sync(context);
+        }
+        return readFromRealm();
+    }
+
     public int getId() {
         return id;
     }
